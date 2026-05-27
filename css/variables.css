@@ -1,0 +1,64 @@
+:root {
+  color-scheme: dark;
+  --color-bg: #080b16;
+  --color-surface: rgba(18, 25, 45, 0.95);
+  --color-surface-strong: #111827;
+  --color-surface-muted: rgba(255, 255, 255, 0.06);
+  --color-text: #f8fbff;
+  --color-text-secondary: #cbd5e1;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-primary: #38bdf8;
+  --color-primary-strong: #0ea5e9;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #fb7185;
+  --color-shadow: 0 24px 64px rgba(9, 14, 35, 0.32);
+  --color-surface-inset: rgba(255, 255, 255, 0.04);
+
+  --radius-base: 18px;
+  --radius-card: 26px;
+  --radius-pill: 999px;
+
+  --space-xxs: 0.35rem;
+  --space-xs: 0.65rem;
+  --space-sm: 0.95rem;
+  --space-md: 1.35rem;
+  --space-lg: 1.8rem;
+  --space-xl: 2.4rem;
+  --space-xxl: 3.2rem;
+
+  --transition-fast: 150ms;
+  --transition-medium: 220ms;
+  --transition-smooth: 320ms;
+  --shadow-soft: 0 18px 42px rgba(9, 14, 35, 0.18);
+  --shadow-border: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  --font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --max-content-width: 520px;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-surface-strong: #f8fafc;
+  --color-surface-muted: #e2e8f0;
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-border: rgba(15, 23, 42, 0.12);
+  --color-primary: #0284c7;
+  --color-primary-strong: #0b69a3;
+  --color-success: #15803d;
+  --color-warning: #c2410c;
+  --color-error: #b91c1c;
+  --color-shadow: 0 24px 54px rgba(15, 23, 42, 0.12);
+  --color-surface-inset: rgba(15, 23, 42, 0.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-medium: 0ms;
+    --transition-smooth: 0ms;
+  }
+}

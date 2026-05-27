@@ -1,121 +1,100 @@
-import { toggleTask, deleteTask, editTaskText, reorderTasks } from "./tasks.js";
+import { addTask, toggleTask, deleteTask, editTaskText, clearCompleted, reorderTasks } from "./tasks.js";
 import { elements } from "./elements.js";
 import { render } from "./ui.js";
+import { setFilter } from "./filters.js";
+import { toggleTheme } from "./theme.js";
+import { showToast } from "./toast.js";
 
-export function setupEventDelegation() {
-  // ======================
-  // CLICK
-  // ======================
-  elements.list.addEventListener("click", (event) => {
-    const button = event.target.closest("button");
-    if (button) {
-      const id = button.dataset.id;
-      const action = button.dataset.action;
+export function configureAppEvents({ onThemeChange } = {}) {
+  elements.taskForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = elements.input.value;
+    const priority = elements.prioritySelect.value;
 
-      if (action === "toggle") {
-        toggleTask(id);
-        render();
-      }
-
-      if (action === "delete") {
-        if (deleteTask(id)) {
-          render();
-        }
-      }
-
+    if (addTask(text, priority)) {
+      elements.input.value = "";
+      elements.input.focus();
+      render();
       return;
     }
 
-    const taskText = event.target.closest(".task-text");
-    if (!taskText) return;
+    showToast("Insira uma tarefa válida antes de adicionar.", "error");
+  });
 
-    const id = taskText.dataset.id;
-    toggleTask(id);
+  elements.filterContainer.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-filter]");
+    if (!button) return;
+
+    setFilter(button.dataset.filter);
     render();
   });
 
-  // ======================
-  // EDIÇÃO
-  // ======================
+  elements.list.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const taskId = button.dataset.id;
+    const action = button.dataset.action;
+
+    if (action === "toggle") {
+      toggleTask(taskId);
+      showToast("Estado da tarefa atualizado.", "success");
+      render();
+    }
+
+    if (action === "delete") {
+      deleteTask(taskId);
+      render();
+    }
+  });
+
+  elements.clearCompletedBtn.addEventListener("click", () => {
+    clearCompleted();
+    render();
+  });
+
+  elements.list.addEventListener("focusin", (event) => {
+    const taskText = event.target.closest(".task-title");
+    if (!taskText) return;
+    taskText.dataset.originalText = taskText.textContent;
+  });
+
   elements.list.addEventListener(
     "blur",
     (event) => {
-      const taskText = event.target.closest(".task-text");
+      const taskText = event.target.closest(".task-title");
       if (!taskText) return;
-      editTaskText(taskText.dataset.id, taskText.textContent);
+
+      const updatedText = taskText.textContent.trim();
+      if (!updatedText) {
+        taskText.textContent = taskText.dataset.originalText || "";
+        showToast("Texto da tarefa não pode ficar vazio.", "error");
+        return;
+      }
+
+      editTaskText(taskText.dataset.id, updatedText);
       render();
     },
     true,
   );
 
-  // ======================
-  // ENTER
-  // ======================
   elements.list.addEventListener("keydown", (event) => {
-    const taskText = event.target.closest(".task-text");
+    const taskText = event.target.closest(".task-title");
     if (!taskText) return;
+
     if (event.key === "Enter") {
       event.preventDefault();
       taskText.blur();
     }
-  });
-}
 
-export function setupDragDelegation() {
-  let draggedItem = null;
-
-  // ======================
-  // DRAG START
-  // ======================
-  elements.list.addEventListener("dragstart", (event) => {
-    const li = event.target.closest("li");
-    if (!li) return;
-    draggedItem = li;
-    li.classList.add("dragging");
+    if (event.key === "Escape") {
+      taskText.textContent = taskText.dataset.originalText || "";
+      taskText.blur();
+    }
   });
 
-  // ======================
-  // DRAG END
-  // ======================
-  elements.list.addEventListener("dragend", (event) => {
-    const li = event.target.closest("li");
-    if (!li) return;
-    li.classList.remove("dragging");
-  });
-
-  // ======================
-  // DRAG OVER
-  // ======================
-  elements.list.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    const li = event.target.closest("li");
-    if (!li || li === draggedItem) return;
-    li.classList.add("drag-over");
-  });
-
-  // ======================
-  // DRAG LEAVE
-  // ======================
-  elements.list.addEventListener("dragleave", (event) => {
-    const li = event.target.closest("li");
-    if (!li) return;
-    li.classList.remove("drag-over");
-  });
-
-  // ======================
-  // DROP
-  // ======================
-  elements.list.addEventListener("drop", (event) => {
-    event.preventDefault();
-    const targetLi = event.target.closest("li");
-    if (!targetLi || !draggedItem) return;
-
-    targetLi.classList.remove("drag-over");
-
-    const fromId = draggedItem.dataset.id;
-    const toId = targetLi.dataset.id;
-
-    reorderTasks(fromId, toId);
-    render();
+  elements.themeToggle.addEventListener("click", () => {
+    toggleTheme();
+    onThemeChange?.();
   });
 }

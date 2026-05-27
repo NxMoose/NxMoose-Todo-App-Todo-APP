@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,40 +7,71 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- Container principal da aplicação -->
-    <div class="container">
-      <!-- Título da aplicação -->
-      <h1>To-Do List</h1>
+    <div class="todo-app">
+      <main class="app-shell" id="appShell">
+        <header class="app-header">
+          <div>
+            <p class="app-subtitle">Organize, priorize e finalize tarefas com um fluxo simples.</p>
+            <h1 class="app-title">Lista de Tarefas</h1>
+          </div>
 
-      <!-- Botões de alternância de tema -->
-      <button type="button" id="themeToggle" title="Alternar tema">🌙</button>
+          <button
+            type="button"
+            id="themeToggle"
+            class="theme-toggle"
+            aria-pressed="false"
+            aria-label="Alternar tema"
+          >
+            <span aria-hidden="true">🌙</span>
+          </button>
+        </header>
 
-      <!-- Área de entrada de novas tarefas -->
-      <div class="input-area">
-        <select id="prioritySelect">
-          <option value="high">Alta</option>
-          <option value="medium" selected>Média</option>
-          <option value="low">Baixa</option>
-        </select>
-        <input type="text" id="taskInput" placeholder="Digite uma tarefa..." />
+        <section class="task-panel">
+          <form id="taskForm" class="task-form" aria-label="Adicionar nova tarefa">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="taskInput" class="visually-hidden">Descrição da tarefa</label>
+                <input
+                  id="taskInput"
+                  class="input"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="Digite uma tarefa..."
+                  aria-describedby="taskHelp"
+                />
+              </div>
 
-        <button type="button" id="addTaskBtn">Adicionar</button>
-      </div>
+              <div class="form-field">
+                <label for="prioritySelect" class="visually-hidden">Prioridade</label>
+                <select id="prioritySelect" class="select" aria-label="Selecionar prioridade">
+                  <option value="high">Alta</option>
+                  <option value="medium" selected>Média</option>
+                  <option value="low">Baixa</option>
+                </select>
+              </div>
+            </div>
 
-      <!-- Filtros para visualizar tarefas -->
-      <div class="filters"></div>
+            <div class="actions-row">
+              <button type="submit" id="addTaskBtn" class="button button-primary">Adicionar</button>
+              <p id="taskHelp" class="task-help">Pressione Enter para salvar a tarefa.</p>
+            </div>
 
-      <!-- Lista de tarefas -->
-      <ul id="taskList"></ul>
+            <div class="actions-row actions-row--secondary" aria-label="Ações da lista">
+              <button type="button" id="clearCompletedBtn" class="button button-ghost">Limpar concluídas</button>
+            </div>
+          </form>
 
-      <!-- Contador de tarefas restantes -->
-      <p id="taskCount"></p>
+          <div class="filters" role="tablist" aria-label="Filtros de tarefas"></div>
+          <div class="task-status" aria-live="polite" aria-atomic="true">
+            <p id="taskCount"></p>
+          </div>
+          <ul id="taskList" class="task-list" aria-label="Lista de tarefas"></ul>
+        </section>
+      </main>
+
+      <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
     </div>
 
-    <!-- Script da aplicação -->
-    <script
-  type="module"
-  src="./js/app.js" 
-></script>
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>

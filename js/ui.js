@@ -4,9 +4,36 @@ import { TaskItem } from "./components/TaskItem.js";
 import { EmptyState } from "./components/EmptyState.js";
 import { elements } from "./elements.js";
 
-export function clearInput() {
-  elements.input.value = "";
-  elements.input.focus();
+const FILTER_OPTIONS = [
+  { filter: "all", label: "Todas" },
+  { filter: "active", label: "Pendentes" },
+  { filter: "completed", label: "Concluídas" },
+];
+
+export function initializeFilterBar() {
+  const fragment = document.createDocumentFragment();
+
+  FILTER_OPTIONS.forEach(({ filter, label }) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "filter-button";
+    button.dataset.filter = filter;
+    button.textContent = label;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-pressed", String(filter === state.filter));
+    fragment.appendChild(button);
+  });
+
+  elements.filterContainer.textContent = "";
+  elements.filterContainer.appendChild(fragment);
+}
+
+export function updateFilterBar() {
+  const buttons = elements.filterContainer.querySelectorAll("button[data-filter]");
+  buttons.forEach((button) => {
+    const isActive = button.dataset.filter === state.filter;
+    button.setAttribute("aria-pressed", String(isActive));
+  });
 }
 
 export function updateCount() {
@@ -15,11 +42,10 @@ export function updateCount() {
   const completed = total - remaining;
 
   let countText = "";
-
   if (total === 0) {
-    countText = "Nenhuma tarefa";
+    countText = "Nenhuma tarefa adicionada ainda.";
   } else if (remaining === 0) {
-    countText = `Todas as ${total} tarefas concluídas!`;
+    countText = `Todas as ${total} tarefas concluídas.`;
   } else {
     countText = `${remaining} de ${total} tarefas restantes`;
     if (completed > 0) {
@@ -27,28 +53,20 @@ export function updateCount() {
     }
   }
 
-  elements.count.innerText = countText;
-}
-
-export function getFilterButtons() {
-  return document.querySelectorAll(".filters button");
+  elements.count.textContent = countText;
 }
 
 export function render() {
-  elements.list.textContent = "";
-
   const tasks = getFilteredTasks();
+  const fragment = document.createDocumentFragment();
 
   if (!tasks.length) {
-    elements.list.appendChild(EmptyState());
-    updateCount();
-    return;
+    fragment.appendChild(EmptyState());
+  } else {
+    tasks.forEach((task) => fragment.appendChild(TaskItem(task)));
   }
 
-  tasks.forEach((task) => {
-    const li = TaskItem(task);
-    elements.list.appendChild(li);
-  });
-
+  elements.list.replaceChildren(fragment);
   updateCount();
+  updateFilterBar();
 }

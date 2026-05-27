@@ -1,6 +1,6 @@
 export function EmptyState() {
-  const empty = document.createElement("p");
-  empty.className = "empty";
-  empty.textContent = "Nenhuma tarefa ainda 🚀";
-  return empty;
+  const item = document.createElement("li");
+  item.className = "empty-state";
+  item.textContent = "Nenhuma tarefa ainda. Comece adicionando a primeira tarefa!";
+  return item;
 }
