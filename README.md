@@ -64,13 +64,27 @@ Durante o desenvolvimento deste projeto, aprofundei meus conhecimentos em:
 
 ## Evolução Técnica
 
-Este projeto foi importante para evoluir minha visão sobre:
+Durante o desenvolvimento deste projeto, evoluí principalmente em:
 
-- Arquitetura frontend
-- Escalabilidade de aplicações
-- Organização de código
-- Experiência do usuário
-- Componentização
-- Performance no frontend
-- Estruturação de projetos reais
-- Boas práticas modernas de desenvolvimento
+- Organização e arquitetura de aplicações frontend
+- Separação de responsabilidades no JavaScript
+- Manipulação dinâmica e eficiente do DOM
+- Gerenciamento de estado em aplicações Vanilla JS
+- Persistência de dados com localStorage
+- Implementação de Event Delegation
+- Criação de componentes reutilizáveis
+- Estruturação de código escalável
+- Responsividade e adaptação para dispositivos móveis
+- Criação de interfaces modernas com foco em UX/UI
+- Implementação de Drag and Drop nativo
+- Boas práticas de Clean Code
+- Performance e otimização de renderização
+- Estruturação de projetos para portfólio profissional
+
+## Desafios Enfrentados
+
+- Organizar o fluxo de renderização sem frameworks
+- Implementar Drag and Drop de forma consistente
+- Manter o código escalável mesmo com novas funcionalidades
+- Melhorar a experiência do usuário sem bibliotecas externas
+- Estruturar o gerenciamento de estado da aplicação
