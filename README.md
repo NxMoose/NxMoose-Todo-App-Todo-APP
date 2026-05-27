@@ -30,11 +30,47 @@ Aplicação web moderna de gerenciamento de tarefas com foco em experiência do 
 
 ## 📸 Preview
 
-(![Interface do aplicativo de Lista de Tarefas exibindo um painel de gerenciamento de tarefas com níveis de prioridade, opção de ativar/desativar o modo escuro, recursos de reorganização por arrastar e soltar e opções de filtragem em um layout moderno e responsivo.](Preview.png.png)) 
+<p align="center">
+  <img src="assets/preview.png" width="700">
+</p>
 
 ## 📚 Aprendizados
 
-- Gerenciamento de estado no front-end
-- Eventos e interatividade com JavaScript
-- Boas práticas de organização de código
-- Construção de interfaces modernas
+## Aprendizados
+
+Durante o desenvolvimento deste projeto, aprofundei meus conhecimentos em:
+
+- Estruturação de aplicações frontend com JavaScript Vanilla
+- Manipulação dinâmica do DOM
+- Gerenciamento de estado da aplicação
+- Persistência de dados utilizando localStorage
+- Criação de filtros dinâmicos
+- Implementação de Drag and Drop
+- Dark/Light Mode com persistência de tema
+- Event Delegation para melhorar performance
+- Organização e modularização de código
+- Criação de componentes reutilizáveis
+- Responsividade com Flexbox e Media Queries
+- Animações e microinterações com CSS
+- Clean Code e separação de responsabilidades
+- Manipulação de eventos complexos
+- Estruturação de arquitetura frontend escalável
+- Boas práticas de UX/UI
+- Acessibilidade básica em aplicações web
+- Performance e otimização de renderização
+- Uso moderno de ES6+
+- Estruturação de projetos para portfólio profissional
+
+
+## Evolução Técnica
+
+Este projeto foi importante para evoluir minha visão sobre:
+
+- Arquitetura frontend
+- Escalabilidade de aplicações
+- Organização de código
+- Experiência do usuário
+- Componentização
+- Performance no frontend
+- Estruturação de projetos reais
+- Boas práticas modernas de desenvolvimento
