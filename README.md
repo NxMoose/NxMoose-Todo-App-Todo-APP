@@ -15,7 +15,7 @@ Aplicação web moderna de gerenciamento de tarefas com foco em experiência do 
 
 - HTML5
 - CSS3
-- JavaScript (Vanilla)
+- JavaScript ES6+
 
 ## 🎯 Diferenciais
 
@@ -30,7 +30,7 @@ Aplicação web moderna de gerenciamento de tarefas com foco em experiência do 
 
 ## 📸 Preview
 
-()
+(![Interface do aplicativo de Lista de Tarefas exibindo um painel de gerenciamento de tarefas com níveis de prioridade, opção de ativar/desativar o modo escuro, recursos de reorganização por arrastar e soltar e opções de filtragem em um layout moderno e responsivo.](Preview.png.png)) 
 
 ## 📚 Aprendizados
 
